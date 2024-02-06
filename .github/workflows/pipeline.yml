@@ -12,17 +12,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
       - name: Install dependencies
         run: npm install
 
-	  - name: use config file 
-	    run: npm init @eslint/config
-	    
       - name: Run ESLint
         run: npx eslint .
         
