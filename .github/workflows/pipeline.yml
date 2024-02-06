@@ -2,7 +2,7 @@ name: GitHub Actions Pipeline
 run-name: ${{ github.actor }} started the pipeline 🚀
 on: [push]
 jobs:
-  Test-Static-Analysis:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -23,7 +23,7 @@ jobs:
 
   Build:
     runs-on: ubuntu-latest
-    needs: Test-Static-Analysis
+    needs: Test
     steps:
 
       - name: Build web app
