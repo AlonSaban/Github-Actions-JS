@@ -20,8 +20,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+	  - name: use config file 
+	    run: npm init @eslint/config
+	    
       - name: Run ESLint
-        run: npm init @eslint/config
         run: npx eslint .
         
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
