@@ -21,6 +21,7 @@ jobs:
         run: npm install
 
       - name: Run ESLint
+        run: npm init @eslint/config
         run: npx eslint .
         
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
