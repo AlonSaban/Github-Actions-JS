@@ -15,8 +15,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        run: npx eslint .
+      - name: Install ESLint
+        run: npm install eslint --save-dev
+
+      - name: Initialize ESLint config
+        run: npm init @eslint/config --yes
         
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
