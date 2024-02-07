@@ -52,8 +52,8 @@ jobs:
     
       - name: Deploy to EC2 - Connect to Instance
         run: |
-          chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.198.23.15 "echo 'Connected to EC2 Instance'"
+          chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@18.156.135.191 "echo 'Connected to EC2 Instance'"
 
       - name: Pull Docker image from Docker Hub
         run: docker pull alonsaban/simple-js-project:latest
@@ -64,6 +64,7 @@ jobs:
       - name: Deploy Docker image to Kubernetes cluster
         run: kubectl apply -f your-kubernetes-manifest.yaml
         
+
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       
