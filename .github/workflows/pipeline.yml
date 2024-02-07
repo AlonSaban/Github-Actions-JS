@@ -51,7 +51,9 @@ jobs:
           port: 22
           script: |
             echo "connected to EC2 🖥️"
-            docker pull alonsaban/simple-js-project:latest
+            sudo docker pull alonsaban/simple-js-project:latest
+            cd /home/ubuntu/github-helm-argo
+            kubectl apply -f your-kubernetes-manifest.yaml 
 
 
       - name: List files in the repository
