@@ -47,22 +47,22 @@ jobs:
     needs: Build-and-Deliver
     steps:
 
-	  - name: Set up SSH key
-	    run: echo "$SSH_PRIVATE_KEY" > private_key
+      - name: Set up SSH key
+        run: echo "$SSH_PRIVATE_KEY" > private_key
 
-	  - name: Deploy to EC2 - Connect to Instance
-	    run: |
-		  chmod 400 private_key
-		  ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.198.23.15 "echo 'Connected to EC2 Instance'"
+      - name: Deploy to EC2 - Connect to Instance
+        run: |
+          chmod 400 private_key
+          ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.198.23.15 "echo 'Connected to EC2 Instance'"
 
-  	  - name: Pull Docker image from Docker Hub
-	    run: docker pull alonsaban/simple-js-project:latest
+      - name: Pull Docker image from Docker Hub
+        run: docker pull alonsaban/simple-js-project:latest
 
    	  - name: Change to the directory containing deploy.yaml
-	    run: cd /home/ubuntu/github-helm-argo
+        run: cd /home/ubuntu/github-helm-argo
 		  
-	  - name: Deploy Docker image to Kubernetes cluster
-	    run: kubectl apply -f your-kubernetes-manifest.yaml
+      - name: Deploy Docker image to Kubernetes cluster
+        run: kubectl apply -f your-kubernetes-manifest.yaml
 
         
         
