@@ -51,9 +51,12 @@ jobs:
         run: echo "$SSH_PRIVATE_KEY" > private_key
     
       - name: Deploy to EC2 - Connect to Instance
+        env:
+            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            
         run: |
           chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@18.156.135.191 "echo 'Connected to EC2 Instance'"
+          ssh -o StrictHostKeyChecking=no -i PRIVATE_KEY ubuntu@18.156.135.191 "echo 'Connected to EC2 Instance'"
 
       - name: Pull Docker image from Docker Hub
         run: docker pull alonsaban/simple-js-project:latest
