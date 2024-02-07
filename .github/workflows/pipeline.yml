@@ -53,7 +53,7 @@ jobs:
             echo "connected to EC2 🖥️"
             sudo docker pull alonsaban/simple-js-project:latest
             cd /home/ubuntu/github-helm-argo
-            kubectl apply -f your-kubernetes-manifest.yaml 
+            kubectl apply -f deployment.yaml 
 
 
       - name: List files in the repository
