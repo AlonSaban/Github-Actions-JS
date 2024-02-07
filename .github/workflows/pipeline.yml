@@ -48,7 +48,7 @@ jobs:
     steps:
       
       - name: Connect to EC2
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@your-ec2-ip-address
+        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@18.198.23.15
 
       - name: Pull Docker image from Docker Hub
         run: docker pull alonsaban/simple-js-project:latest
