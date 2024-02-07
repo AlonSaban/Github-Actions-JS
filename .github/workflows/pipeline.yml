@@ -18,8 +18,9 @@ jobs:
       - name: Initialize ESLint config
         run: npm init @eslint/config --yes
 
-  build-and-push:
+  Build-and-Push:
     runs-on: ubuntu-latest
+    needs: Test
 
     steps:
       - name: Check out repository code
@@ -35,4 +36,12 @@ jobs:
           tags: alonsaban/simple-js-project:latest
           context: .
           file: ./Dockerfile
+        
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
 
