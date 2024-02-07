@@ -47,14 +47,14 @@ jobs:
     needs: Build-and-Deliver
     steps:
 
-    - name: Set up SSH key
-      run: |
-        echo "$SSH_PRIVATE_KEY" > private_key
-        chmod 600 private_key
+      - name: Set up SSH key
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
     
-    - name: Deploy to EC2 - Connect to Instance
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.198.23.15 "echo 'Connected to EC2 Instance'"
+      - name: Deploy to EC2 - Connect to Instance
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.198.23.15 "echo 'Connected to EC2 Instance'"
 
       - name: Pull Docker image from Docker Hub
         run: docker pull alonsaban/simple-js-project:latest
