@@ -48,20 +48,14 @@ jobs:
     steps:
 
       - name: Set up SSH key
-        run: echo "$SSH_PRIVATE_KEY" > private_key
-    
-      - name: Deploy to EC2 - Connect to Instance
-        env:
-            PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            
         run: |
-          chmod 600 private_key
-          sudo ssh -o StrictHostKeyChecking=no -i ./private_key ubuntu@18.156.135.191 "echo 'Connected to EC2 Instance'"
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          sudo ssh -o StrictHostKeyChecking=no -i private_key ubuntu@18.156.135.191
 
       - name: Pull Docker image from Docker Hub
         run: docker pull alonsaban/simple-js-project:latest
 
-      - name: Change to the directory containing deploy.yaml
+      - name: Change to the directory containing yaml.deploy
         run: cd /home/ubuntu/github-helm-argo
       
       - name: Deploy Docker image to Kubernetes cluster
