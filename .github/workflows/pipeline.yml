@@ -26,9 +26,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Build web app
         run: npm run build
 
@@ -46,21 +43,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: Build-and-Deliver
     steps:
-
-      - name: Set up SSH key
-        run: |
-          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
-          sudo ssh -o StrictHostKeyChecking=no -i private_key ubuntu@18.156.135.191
-
-      - name: Pull Docker image from Docker Hub
-        run: docker pull alonsaban/simple-js-project:latest
-
-      - name: Change to the directory containing yaml.deploy
-        run: cd /home/ubuntu/github-helm-argo
-      
-      - name: Deploy Docker image to Kubernetes cluster
-        run: kubectl apply -f your-kubernetes-manifest.yaml
-        
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker pull alonsaban/simple-js-project:latest
+            cd /home/ubuntu/github-helm-argo
+            kubectl apply -f your-kubernetes-manifest.yaml 
 
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
