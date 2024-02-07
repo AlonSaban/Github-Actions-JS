@@ -26,9 +26,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Build web app
-        run: npm run build
-
       - name: Build Docker image
         run: |
           docker build -t alonsaban/simple-js-project:latest .
